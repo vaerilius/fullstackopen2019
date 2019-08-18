@@ -1,6 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+const Part = (props) => {
+    return (
+        <>
+            <p> {props.part} {props.exercice} </p>
+        </>
+    )
+};
+
 const Header = (props) => {
     return (
         <>
@@ -11,15 +19,14 @@ const Header = (props) => {
 const Content = (props) => {
 
     return (
-
-
         <>
-            <p > {props.parts[0]} {props.exercices[0]} </p>
-            <p > {props.parts[1]}  {props.exercices[1]}</p>
-            <p > {props.parts[2]}  {props.exercices[2]}</p>
+            <Part part={props.parts[0]} exercice={props.exercices[0]}/>
+            <Part part={props.parts[1]} exercice={props.exercices[1]}/>
+            <Part part={props.parts[2]} exercice={props.exercices[2]}/>
         </>
-    )
+    );
 };
+
 const Total = (props) => {
     return (
         <>
@@ -39,9 +46,9 @@ const App = () => {
 
     return (
         <div>
-            <Header course={course} />
-            <Content parts={[part1, part2, part3]}  exercices={[exercises1, exercises2, exercises3]}/>
-            <Total  exercices={[exercises1, exercises2, exercises3]}/>
+            <Header course={course}/>
+            <Content parts={[part1,part2,part3]} exercices={[exercises1,exercises2,exercises3]} />
+            <Total parts={[part1,part2,part3]} exercices={[exercises1,exercises2,exercises3]}/>
         </div>
     )
 };
