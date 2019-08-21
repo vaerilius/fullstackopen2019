@@ -41,17 +41,17 @@ const App = () => {
 
     return (
         <div>
-            <Header value={'give feedback'}></Header>
-            <Button handleClick={() => setGood(good + 1)} value={feedback.status.good}></Button>
-            <Button handleClick={() => setNeutral(neutral + 1)} value={feedback.status.neutral}></Button>
-            <Button handleClick={() => setBad(bad + 1)} value={feedback.status.bad}></Button>
-            <Header value={'statistics'}></Header>
-            <Statistics value={feedback.status.good} amount={good}></Statistics>
-            <Statistics value={feedback.status.neutral} amount={neutral}></Statistics>
-            <Statistics value={feedback.status.bad} amount={bad}></Statistics>
-            <Statistics value={feedback.status.all} amount={all}></Statistics>
-            <Statistics value={feedback.status.avg} amount={avg}></Statistics>
-            <Statistics value={feedback.status.pos} amount={pos} pro={'%'}></Statistics>
+            <Header value={'give feedback'}/>
+            <Button handleClick={() => setGood(good + 1)} value={feedback.status.good}/>
+            <Button handleClick={() => setNeutral(neutral + 1)} value={feedback.status.neutral}/>
+            <Button handleClick={() => setBad(bad + 1)} value={feedback.status.bad}/>
+            <Header value={'statistics'}/>
+            <Statistics value={feedback.status.good} amount={good}/>
+            <Statistics value={feedback.status.neutral} amount={neutral}/>
+            <Statistics value={feedback.status.bad} amount={bad}/>
+            <Statistics value={feedback.status.all} amount={all} />
+            <Statistics value={feedback.status.avg} amount={avg} />
+            <Statistics value={feedback.status.pos} amount={pos} pro={'%'} />
 
         </div>
     )
