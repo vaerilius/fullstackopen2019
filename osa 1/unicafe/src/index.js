@@ -7,6 +7,41 @@ const Button = (props) => (<>
     <button onClick={props.handleClick}>{props.data}</button>
 </>)
 
+const Statistic = (props) => {
+
+    return (
+        <table>
+            <tr>
+                <td>{props.data.status.good}  </td>
+                <td>{props.data.amounts.good}</td>
+            </tr>
+            <tr>
+                <td>{props.data.status.neutral}</td>
+                <td> {props.data.amounts.neutral} </td>
+            </tr>
+            <tr>
+                <td>{props.data.status.bad}  </td>
+                <td>{props.data.amounts.bad}</td>
+            </tr>
+            <tr>
+                <td>{props.data.status.all}  </td>
+                <td>{props.data.amounts.all}</td>
+            </tr>
+            <tr>
+                <td>{props.data.status.avg}  </td>
+                <td>{props.data.amounts.avg}</td>
+            </tr>
+            <tr>
+                <td>{props.data.status.pos}  </td>
+                <td>{props.data.amounts.pos}</td>
+            </tr>
+
+        </table>
+
+
+    )
+}
+
 const Statistics = (props) => {
 
     if (isNaN(props.data.amounts.avg)) {
@@ -17,20 +52,14 @@ const Statistics = (props) => {
         )
     }
     return (
-        <div>
-            <p>{props.data.status.good} {props.data.amounts.good} </p>
-            <p>{props.data.status.neutral} {props.data.amounts.neutral} </p>
-            <p>{props.data.status.bad} {props.data.amounts.bad} </p>
-            <p>{props.data.status.all} {props.data.amounts.all} </p>
-            <p>{props.data.status.avg} {props.data.amounts.avg} </p>
-            <p>{props.data.status.pos} {props.data.amounts.pos} </p>
-        </div>
-
+        <>
+            <Statistic data={props.data}></Statistic>
+        </>
     )
 }
 
 
-const NoFeedback = () => (<div><p> No feedback given</p></div>)
+const NoFeedback = () => (<><p> No feedback given</p></>)
 
 
 const App = () => {
