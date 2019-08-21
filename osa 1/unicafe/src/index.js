@@ -8,12 +8,12 @@ const Button = (props) => (<>
 </>)
 
 const Statistics = (props) => {
-    console.log(props.value)
-    return (
-        <div>
-            <p> {props.value} {props.amount} </p>
-        </div>
-    )
+
+    let amount = props.amount;
+    if (isNaN(props.amount)) {
+        amount = 0;
+    }
+    return (<p> {props.value} {amount} {props.pro} </p>)
 }
 
 
@@ -28,9 +28,15 @@ const App = () => {
         status: {
             good: 'good',
             neutral: 'neutral',
-            bad: 'bad'
+            bad: 'bad',
+            all: 'all',
+            avg: 'average',
+            pos: 'positive'
         }
     }
+    const all = (good + bad + neutral);
+    const avg = ((good - bad) / all);
+    const pos = ((good / all));
 
 
     return (
@@ -43,6 +49,9 @@ const App = () => {
             <Statistics value={feedback.status.good} amount={good}></Statistics>
             <Statistics value={feedback.status.neutral} amount={neutral}></Statistics>
             <Statistics value={feedback.status.bad} amount={bad}></Statistics>
+            <Statistics value={feedback.status.all} amount={all}></Statistics>
+            <Statistics value={feedback.status.avg} amount={avg}></Statistics>
+            <Statistics value={feedback.status.pos} amount={pos} pro={'%'}></Statistics>
 
         </div>
     )
