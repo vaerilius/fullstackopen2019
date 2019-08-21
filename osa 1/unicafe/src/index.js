@@ -11,6 +11,7 @@ const Statistic = (props) => {
 
     return (
         <table>
+            <tbody>
             <tr>
                 <td>{props.data.status.good}  </td>
                 <td>{props.data.amounts.good}</td>
@@ -35,7 +36,7 @@ const Statistic = (props) => {
                 <td>{props.data.status.pos}  </td>
                 <td>{props.data.amounts.pos}</td>
             </tr>
-
+            </tbody>
         </table>
 
 
@@ -87,7 +88,6 @@ const App = () => {
             pos: 'positive'
         }
     }
-
 
 
     return (
