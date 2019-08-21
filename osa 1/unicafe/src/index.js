@@ -4,17 +4,33 @@ import ReactDOM from 'react-dom'
 const Header = (header) => (<div><h1>{header.value}</h1></div>)
 
 const Button = (props) => (<>
-    <button onClick={props.handleClick}>{props.value}</button>
+    <button onClick={props.handleClick}>{props.data}</button>
 </>)
 
 const Statistics = (props) => {
 
-    let amount = props.amount;
-    if (isNaN(props.amount)) {
-        amount = 0;
+    if (isNaN(props.data.amounts.avg)) {
+        return (
+            <>
+                <NoFeedback></NoFeedback>
+            </>
+        )
     }
-    return (<p> {props.value} {amount} {props.pro} </p>)
+    return (
+        <div>
+            <p>{props.data.status.good} {props.data.amounts.good} </p>
+            <p>{props.data.status.neutral} {props.data.amounts.neutral} </p>
+            <p>{props.data.status.bad} {props.data.amounts.bad} </p>
+            <p>{props.data.status.all} {props.data.amounts.all} </p>
+            <p>{props.data.status.avg} {props.data.amounts.avg} </p>
+            <p>{props.data.status.pos} {props.data.amounts.pos} </p>
+        </div>
+
+    )
 }
+
+
+const NoFeedback = () => (<div><p> No feedback given</p></div>)
 
 
 const App = () => {
@@ -23,8 +39,16 @@ const App = () => {
     const [neutral, setNeutral] = useState(0)
     const [bad, setBad] = useState(0)
 
-
-    const feedback = {
+    const statistics = {
+        amounts: {
+            good: good,
+            neutral: neutral,
+            bad: bad,
+            all: (good + bad + neutral),
+            avg: ((good - bad) / (good + bad + neutral)),
+            pos: (good / (good + bad + neutral)),
+            isGivenFeedback: false
+        },
         status: {
             good: 'good',
             neutral: 'neutral',
@@ -34,25 +58,16 @@ const App = () => {
             pos: 'positive'
         }
     }
-    const all = (good + bad + neutral);
-    const avg = ((good - bad) / all);
-    const pos = ((good / all));
 
 
     return (
         <div>
             <Header value={'give feedback'}/>
-            <Button handleClick={() => setGood(good + 1)} value={feedback.status.good}/>
-            <Button handleClick={() => setNeutral(neutral + 1)} value={feedback.status.neutral}/>
-            <Button handleClick={() => setBad(bad + 1)} value={feedback.status.bad}/>
+            <Button handleClick={() => setGood(good + 1)} data={statistics.status.good}/>
+            <Button handleClick={() => setNeutral(neutral + 1)} data={statistics.status.neutral}/>
+            <Button handleClick={() => setBad(bad + 1)} data={statistics.status.bad}/>
             <Header value={'statistics'}/>
-            <Statistics value={feedback.status.good} amount={good}/>
-            <Statistics value={feedback.status.neutral} amount={neutral}/>
-            <Statistics value={feedback.status.bad} amount={bad}/>
-            <Statistics value={feedback.status.all} amount={all} />
-            <Statistics value={feedback.status.avg} amount={avg} />
-            <Statistics value={feedback.status.pos} amount={pos} pro={'%'} />
-
+            <Statistics data={statistics}/>
         </div>
     )
 }
