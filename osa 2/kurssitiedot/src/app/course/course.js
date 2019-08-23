@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from "./header/header";
 import Component from "./Content/content";
+import Total from "./Content/total";
 
 const Course = ({course}) => {
 
@@ -8,6 +9,7 @@ const Course = ({course}) => {
         <div>
             <Header header={course.name} />
             <Component parts={course.parts}/>
+            <Total  total={course.parts}/>
 
         </div>
     )
