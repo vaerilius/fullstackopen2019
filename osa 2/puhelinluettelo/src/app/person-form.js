@@ -2,14 +2,13 @@ import React, {useState} from "react";
 
 const PersonForm = (props) => {
     const [newName, setNewName] = useState('');
-    const [onList, setonList] = useState(false);
+    const [newNumber, setNewNumber] = useState('');
 
-    const handlePersonChange = (e) => {
-        setNewName(e.target.value)
-    }
+    const handleNameChange = (e) => setNewName(e.target.value);
+    const handleNumberChange = (e) => setNewNumber(e.target.value);
 
     const addPerson = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         const arr =  props.persons.map(person => {
            return  person.name.toUpperCase()
@@ -22,29 +21,33 @@ const PersonForm = (props) => {
 
         const personObject = {
             name: newName,
-            number: ''
-        }
-
-
-
-
-
+            number: newNumber
+        };
 
         props.setPerson(props.persons.concat(personObject))
-    }
+    };
 
     return (
         <div>
             <form onSubmit={addPerson}>
-                <input
-                    value={newName}
-                    onChange={handlePersonChange}
-                />
+                <div>Name:
+                    <input
+                        value={newName}
+                        onChange={handleNameChange}
+                    />
+                </div>
+
+                <br/>
+                <div>number: <input
+                    value={newNumber}
+                    onChange={handleNumberChange}
+                /></div>
                 <br/>
                 <button>add</button>
             </form>
         </div>
 
     )
-}
+};
+
 export default PersonForm
