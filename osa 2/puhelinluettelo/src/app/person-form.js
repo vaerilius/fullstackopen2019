@@ -1,18 +1,35 @@
 import React, {useState} from "react";
 
 const PersonForm = (props) => {
-    const [newPerson, setNewPerson] = useState('');
+    const [newName, setNewName] = useState('');
+    const [onList, setonList] = useState(false);
 
     const handlePersonChange = (e) => {
-        console.log(e.target.value)
-        setNewPerson(e.target.value)
+        setNewName(e.target.value)
     }
+
     const addPerson = (e) => {
         e.preventDefault()
+
+        const arr =  props.persons.map(person => {
+           return  person.name.toUpperCase()
+        })
+
+        if (arr.includes(newName.toUpperCase())) {
+            alert(`${newName} is already added to phonebook` );
+            return
+        }
+
         const personObject = {
-            name: newPerson,
+            name: newName,
             number: ''
         }
+
+
+
+
+
+
         props.setPerson(props.persons.concat(personObject))
     }
 
@@ -20,7 +37,7 @@ const PersonForm = (props) => {
         <div>
             <form onSubmit={addPerson}>
                 <input
-                    value={newPerson}
+                    value={newName}
                     onChange={handlePersonChange}
                 />
                 <br/>
