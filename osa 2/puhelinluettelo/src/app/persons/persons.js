@@ -1,10 +1,15 @@
 import React from "react";
 import Person from "./person/person";
 
-const Persons = ({data}) => {
+const Persons = (props) => {
+    const personsToShow =
+        props.data.filter(person => {
+            if (person.name.toUpperCase().includes(props.filter.toUpperCase())) {
+                return person
+            }
+        })
 
-
-        const rows = () => data.map(person =>
+        const rows = () => personsToShow.map(person =>
             <Person
                 key={person.name}
                 data={person}
