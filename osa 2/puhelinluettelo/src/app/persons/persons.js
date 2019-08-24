@@ -7,14 +7,15 @@ const Persons = (props) => {
             if (person.name.toUpperCase().includes(props.filter.toUpperCase())) {
                 return person
             }
-        })
+        });
 
-        const rows = () => personsToShow.map(person =>
-            <Person
-                key={person.name}
-                data={person}
-            />
-        )
+    const rows = () => personsToShow.map(person =>
+        <Person
+            key={person.name}
+            data={person}
+        />
+    );
+
     return (
         <div>
             {rows()}
@@ -23,4 +24,5 @@ const Persons = (props) => {
 
     )
 }
+
 export default Persons

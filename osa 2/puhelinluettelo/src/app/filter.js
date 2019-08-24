@@ -2,10 +2,9 @@ import React from "react";
 
 const Filter = (props) => {
 
-
-    const handleFilterChange = (e) =>{
+    const handleFilterChange = (e) => {
         props.setFilter(e.target.value)
-    }
+    };
 
     return (
         <div>
@@ -21,6 +20,6 @@ const Filter = (props) => {
         </div>
 
     )
-}
+};
 
 export default Filter

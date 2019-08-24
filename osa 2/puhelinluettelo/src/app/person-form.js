@@ -10,12 +10,12 @@ const PersonForm = (props) => {
     const addPerson = (e) => {
         e.preventDefault();
 
-        const arr =  props.persons.map(person => {
-           return  person.name.toUpperCase()
-        })
+        const arr = props.persons.map(person => {
+            return person.name.toUpperCase()
+        });
 
         if (arr.includes(newName.toUpperCase())) {
-            alert(`${newName} is already added to phonebook` );
+            alert(`${newName} is already added to phonebook`);
             return
         }
 
