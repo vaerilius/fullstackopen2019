@@ -1,6 +1,8 @@
 import React from "react";
+import Weather from "../../weather";
 
 const CountryDetail = ({data}) => {
+
     const languages = () => data.languages.map(language => {
         return <li key={language.name}> {language.name} </li>
     })
@@ -16,8 +18,10 @@ const CountryDetail = ({data}) => {
             </ul>
             <img src={data.flag} alt="" width="100" height="70"/>
 
+            <Weather name={data.capital}/>
         </div>
 
     )
 }
+
 export default CountryDetail

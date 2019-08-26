@@ -23,12 +23,13 @@ const Countries = (props) => {
         return data.map(country =>
             <CountryDetail
                 key={country.name}
-                data={country}/>
+                data={country}
+            />
         )
-    } else {
-        return <div> 'Too many matches, specify another filter'</div>
-    }
 
+    } else {
+        return <div> Too many matches, specify another filter</div>
+    }
 }
 
 export default Countries
