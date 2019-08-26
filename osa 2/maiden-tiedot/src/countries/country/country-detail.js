@@ -1,10 +1,10 @@
 import React from "react";
 
 const CountryDetail = ({data}) => {
-console.log(data)
     const languages = () => data.languages.map(language => {
         return <li key={language.name}> {language.name} </li>
     })
+
     return(
         <div>
             <h1> {data.name} </h1>

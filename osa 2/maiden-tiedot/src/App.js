@@ -5,13 +5,9 @@ import Countries from "./countries/countries";
 
 
 
-const App = (effect, inputs) => {
-
+const App = () => {
   const [countriesData, setCountriesData] = useState([]);
-
   const [filter, setFilter] = useState('');
-
-
 
 
 
@@ -19,12 +15,14 @@ const App = (effect, inputs) => {
     axios
         .get('https://restcountries.eu/rest/v2/all')
         .then(response => {
-
           setCountriesData(response.data)
-
         })
-
       }, [])
+
+  const handleSelected = (selectedCountry) => () => {
+    setFilter(selectedCountry)
+  }
+
 
 
   return (
@@ -33,10 +31,10 @@ const App = (effect, inputs) => {
       <Countries
           countriesData={countriesData}
           filter={filter}
-
+          setSelected={handleSelected}
       />
     </div>
-  );
+  )
 }
 
 export default App;

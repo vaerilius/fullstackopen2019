@@ -1,6 +1,6 @@
 import React from "react";
-import Country from "./country/country"
 import CountryDetail from "./country/country-detail"
+import CountryList from "./country/country-list";
 
 const Countries = (props) => {
 
@@ -8,35 +8,27 @@ const Countries = (props) => {
         if (country.name.toUpperCase().includes(props.filter.toUpperCase())) {
             return country
         }
-
+        return null
     })
 
-
-    let output;
     if (data.length > 1 && data.length < 11) {
-        output = data.map(country =>
-            <Country
+        return data.map(country =>
+            <CountryList
                 key={country.name}
                 data={country}
-            />
+                setSelected={props.setSelected}/>
         )
+
     } else if (data.length === 1) {
-        output = data.map(country =>
+        return data.map(country =>
             <CountryDetail
                 key={country.name}
-                data={country}
-            />
+                data={country}/>
         )
     } else {
-        output = 'Too many matches, specify another filter'
+        return <div> 'Too many matches, specify another filter'</div>
     }
 
-    return (
-        <>
-            {output}
-        </>
-
-    )
 }
 
 export default Countries
