@@ -19,7 +19,8 @@ const Countries = (props) => {
                 setSelected={props.setSelected}/>
         )
 
-    } else if (data.length === 1) {
+    }
+    if (data.length === 1) {
         return data.map(country =>
             <CountryDetail
                 key={country.name}
