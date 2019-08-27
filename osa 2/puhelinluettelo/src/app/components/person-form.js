@@ -1,14 +1,13 @@
 import React from "react";
 
-const PersonForm = ({addPerson, setNewName,setNewNumber, name, number}) => {
+const PersonForm = ({addperson, setName,setNumber, name, number}) => {
 
-
-    const handleNameChange = (e) => setNewName(e.target.value);
-    const handleNumberChange = (e) => setNewNumber(e.target.value);
+    const handleNameChange = (e) => setName(e.target.value);
+    const handleNumberChange = (e) => setNumber(e.target.value);
 
     return (
         <div>
-            <form onSubmit={addPerson}>
+            <form onSubmit={addperson}>
                 <div>Name:
                     <input
                         value={name}
