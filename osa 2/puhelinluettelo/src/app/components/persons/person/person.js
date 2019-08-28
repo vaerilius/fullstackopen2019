@@ -4,8 +4,7 @@ const Person = ({data,deletePerson}) => {
 
     return(
         <div>
-            {data.name}
-            {data.number}
+            {data.name} - {data.number}
             <button
                 value={data.id}
                 onClick={deletePerson}>delete</button>

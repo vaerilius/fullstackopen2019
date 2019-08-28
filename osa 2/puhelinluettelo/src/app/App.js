@@ -23,6 +23,11 @@ const App = () => {
             })
     }, []);
 
+    const clearInpunts = () => {
+        setNewName('')
+        setNewNumber('')
+    }
+
     const showMessage = (message) => {
         setMessage(message)
         setTimeout(() => {
@@ -53,8 +58,17 @@ const App = () => {
                             .getAll()
                             .then(response => {
                                 setPersons(response);
-                                setNewName('')
-                                setNewNumber('')
+                                clearInpunts()
+                            })
+                    })
+                    .catch(err => {
+                        setError(true)
+                        showMessage(`Information of ${newName} has already been removed from server`)
+                        personsService
+                            .getAll()
+                            .then(response => {
+                                setPersons(response);
+                                clearInpunts()
                             })
                     })
                 return;
@@ -67,8 +81,7 @@ const App = () => {
                 setError(false)
                 showMessage(`Added ${newName}`)
                 setPersons(persons.concat(response))
-                setNewName('')
-                setNewNumber('')
+                clearInpunts()
             })
     };
 
@@ -81,8 +94,7 @@ const App = () => {
         if (!window.confirm(`Delete ${findedPerson.name}`)) {
             return
         }
-        setError(true)
-        showMessage(`${findedPerson.name} removed`)
+
         personsService
             .remove(findedPerson.id)
             .then(response => {
@@ -91,10 +103,21 @@ const App = () => {
                     .then(response => {
                         console.log(response)
                         setPersons(response);
+                        setError(true)
+                        showMessage(`${findedPerson.name} removed`)
+                    })
+            })
+            .catch(err => {
+                setError(true)
+                showMessage(`Information of ${newName} has already been removed from server`)
+                personsService
+                    .getAll()
+                    .then(response => {
+                        setPersons(response);
+                        clearInpunts()
                     })
             })
     }
-
 
     return (
         <div>
