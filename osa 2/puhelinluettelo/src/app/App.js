@@ -80,7 +80,7 @@ const App = () => {
             .then(response => {
                 setError(false)
                 showMessage(`Added ${newName}`)
-                setPersons(persons.concat(response))
+                setPersons(persons.concat(personObject))
                 clearInpunts()
             })
     };
