@@ -72,6 +72,31 @@ test('a valid blog can be added', async () => {
    // 4.10: blogilistan testit, step3
 })
 
+test('testi joka varmistaa, että jos kentälle likes ei anneta arvoa, asetetaan sen arvoksi 0', async () => {
+   const blog = {
+      title: 'no one likes me',
+      author: 'putin',
+      url: 'putin.com'
+   }
+   if (blog.likes === undefined) {
+      blog.likes = 0 
+   }
+   await api
+   .post('/api/blogs')
+   .send(blog)
+   .expect(200)
+   .expect('Content-Type', /application\/json/)
+
+   const blogsAtEnd = await helper.blogsInDb()
+   expect(blogsAtEnd.length).toBe(helper.initialBlogs.length + 1)
+
+   const findedBlog = blogsAtEnd.find(b => b.title === blog.title)
+   expect(findedBlog.likes).toBe(0)
+
+})
+
+
+
 // test('blog without content is not added', async () => {
 //    const newBlog = {
 //       author: 'async',
