@@ -37,7 +37,7 @@ const mostLikes = (blogs) => {
       if (!list[blog.author]) {
          list[blog.author] = { author: blog.author, likes: 0 }
       }
-      list[blog.author].likes += blog.likes 
+      list[blog.author].likes += blog.likes
       if (mostLikesBlog.likes < list[blog.author].likes) {
          mostLikesBlog = list[blog.author]
       }
