@@ -30,6 +30,11 @@ test('all blogs are returned ', async () => {
    const response = await api.get('/api/blogs')
    expect(response.body.length).toBe(helper.initialBlogs.length)
 })
+test('palautettujen blogien identifioivan kentän tulee olla nimeltään id', async () => {
+   const blogsAtStart = await helper.blogsInDb()
+
+   expect('id' in blogsAtStart[0]).toEqual(true)
+})
 
 test('a specific blog is within the returned blog', async () => {
    const response = await api.get('/api/blogs')
