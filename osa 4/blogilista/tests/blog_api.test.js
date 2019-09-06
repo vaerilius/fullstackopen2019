@@ -33,7 +33,11 @@ test('all blogs are returned ', async () => {
 test('palautettujen blogien identifioivan kentän tulee olla nimeltään id', async () => {
    const blogsAtStart = await helper.blogsInDb()
 
-   expect('id' in blogsAtStart[0]).toEqual(true)
+   let isId = false;
+
+   blogsAtStart.filter(blog => 'id' in blog ? isId = true : isId = false )
+
+   expect(isId).toEqual(true)
 })
 
 test('a specific blog is within the returned blog', async () => {
@@ -65,6 +69,7 @@ test('a valid blog can be added', async () => {
    const titles = blogsAtEnd.map(r => r.title)
 
    expect(titles).toContain('async/await simplifies making async calls')
+   // 4.10: blogilistan testit, step3
 })
 
 // test('blog without content is not added', async () => {
