@@ -94,6 +94,23 @@ test('testi joka varmistaa, että jos kentälle likes ei anneta arvoa, asetetaan
    expect(findedBlog.likes).toBe(0)
 
 })
+test(' uusi blogi ei sisällä kenttiä title ja url, pyyntöön vastataan statuskoodilla 400 Bad request', async () => {
+   const blog = {
+      author: 'kekkonen',
+      likes: 200
+   }
+   if (blog.likes === undefined) {
+      blog.likes = 0 
+   }
+   await api
+   .post('/api/blogs')
+   .send(blog)
+   .expect(400)
+
+   const blogsAtEnd = await helper.blogsInDb()
+   expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
+
+})
 
 
 
@@ -105,7 +122,7 @@ test('testi joka varmistaa, että jos kentälle likes ei anneta arvoa, asetetaan
 //    await api
 //       .post('/api/blogs')
 //       .send(newBlog)
-//       .expect(500)
+//       .expect(400)
 
 //    const blogsAtEnd = await helper.blogsInDb()
 
