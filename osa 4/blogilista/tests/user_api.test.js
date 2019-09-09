@@ -20,9 +20,9 @@ describe('when there is initially one user at db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'mluukkai',
+      username: '',
       name: 'Matti Luukkainen',
-      password: 'salainen',
+      password: '',
     }
 
     await api
@@ -38,6 +38,7 @@ describe('when there is initially one user at db', () => {
     expect(usernames).toContain(newUser.username)
   })
 })
+
 afterAll(() => {
     mongoose.connection.close()
  })
