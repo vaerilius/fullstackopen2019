@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './Blog';
 
-const UserBlogs = ({ blogs, user }) => {
-    const [filterAndSortBlogs, setFilteredAndSortedBlogs] = useState([])
+const UserBlogs = ({ blogs, user, setBlogs }) => {
+
+
+
 
     const ulStyle = {
         fontSize: 16,
@@ -17,19 +19,17 @@ const UserBlogs = ({ blogs, user }) => {
         return list
     }
 
-   let blogsToShow = filterAndSort(blogs)
-
+    let blogsToShow = filterAndSort(blogs)
     const rows = () => blogsToShow.map(blog => (
         <Blog
             key={blog.id}
             blog={blog}
-            setBlogs={setFilteredAndSortedBlogs}
-            blogs={filterAndSortBlogs}
+            setBlogs={setBlogs}
+            blogs={blogs}
+
         />
 
     )
-
-
     )
 
     return (

@@ -10,7 +10,7 @@ import Togglable from './components/togglable'
 function App() {
 
   const [blogs, setBlogs] = useState([])
-  // const [filteredBlogs, setFilteredBlogs] = useState([])
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -20,7 +20,7 @@ function App() {
 
 
 
-  useEffect(() => {
+ useEffect(() => {
 
     blogService.getAll().then(initialBlogs => {
       setBlogs(initialBlogs)
@@ -28,7 +28,8 @@ function App() {
 
   }, [])
 
-  useEffect(() => {
+
+   useEffect(() => {
     const loggedUser = window.localStorage.getItem('user')
     if (loggedUser) {
       const user = JSON.parse(loggedUser)
@@ -38,6 +39,7 @@ function App() {
     }
 
   }, [])
+
 
   const showMessage = (message) => {
     setMessage(message)
@@ -63,7 +65,6 @@ function App() {
       setPassword('')
       setError(null)
       showMessage(`user:  ${loggedUser.username} logged in`)
-
     } catch (error) {
       setError(true)
       showMessage(`invalid username or password`)
@@ -92,13 +93,16 @@ function App() {
 
     try {
       const response = await blogService.create(newBlog)
-      const allBlogs = await blogService.getAll()
-      setBlogs(allBlogs)
+      setBlogs(blogs.concat(response))
+
+      // const allBlogs = await blogService.getAll()
+      // setBlogs(allBlogs)
       setError(null)
       showMessage(`a new blog ${newBlog.title} by ${newBlog.author}`)
-  
+
 
     } catch (error) {
+      console.log(error.message)
       setError(true)
       showMessage(`Fields validation failed, make them valid`)
     }
@@ -134,9 +138,9 @@ function App() {
         <p> {user.name} logged in</p>
         <button onClick={logout}>logout</button>
         <Togglable buttonLabel='new blog' ref={blogFormRef}>
-        <NewBlogForm
-          handlecreate={handlecreate}
-        />
+          <NewBlogForm
+            handlecreate={handlecreate}
+          />
 
         </Togglable>
 
@@ -144,6 +148,7 @@ function App() {
           blogs={blogs}
           user={user}
           setBlogs={setBlogs}
+
         />
       </div>
     )
