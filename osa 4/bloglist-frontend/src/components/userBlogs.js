@@ -1,7 +1,7 @@
 import React from 'react'
  import Blog from './Blog';
 
-const UserBlogs = ({ blogs, user }) => {
+const UserBlogs = ({ blogs, user, setBlogs }) => {
 
     const ulStyle = {
         fontSize: 16,
@@ -29,6 +29,7 @@ const UserBlogs = ({ blogs, user }) => {
         <Blog 
               key={blog.id}
                 blog={blog}
+                setBlogs={setBlogs}
               />
 
     ) 

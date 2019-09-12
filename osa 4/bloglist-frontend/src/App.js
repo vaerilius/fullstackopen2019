@@ -7,9 +7,6 @@ import NewBlogForm from './components/new-blog-form';
 import Notification from './components/notification';
 import Togglable from './components/togglable'
 
-
-
-
 function App() {
 
   const [blogs, setBlogs] = useState([])
@@ -19,7 +16,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [error, setError] = useState(false)
   const [message, setMessage] = useState(null)
-  const [newBlogFormVisible, setNewBlogFormVisible] = useState(false)
+  // const [newBlogFormVisible, setNewBlogFormVisible] = useState(false)
 
 
 
@@ -88,7 +85,8 @@ function App() {
     const newBlog = {
       title: e.target.title.value,
       author: e.target.author.value,
-      url: e.target.url.value
+      url: e.target.url.value,
+      likes: 0
     }
 
 
@@ -145,6 +143,7 @@ function App() {
         <UserBlogs
           blogs={blogs}
           user={user}
+          setBlogs={setBlogs}
         />
       </div>
     )
