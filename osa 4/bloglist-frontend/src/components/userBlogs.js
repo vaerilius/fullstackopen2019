@@ -2,6 +2,13 @@ import React from 'react'
  import Blog from './Blog';
 
 const UserBlogs = ({ blogs, user }) => {
+
+    const ulStyle = {
+        fontSize: 16,
+        listStyleType: 'none',
+        padding: 10
+        
+      }
     
     const blogsToShow = blogs.filter(blog => {
 
@@ -30,9 +37,9 @@ const UserBlogs = ({ blogs, user }) => {
     )
 
     return (
-        <div>
+        <ul style={ulStyle}>
             {rows()}
-        </div>
+        </ul>
     )
 
 
