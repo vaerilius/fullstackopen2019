@@ -5,6 +5,7 @@ import blogService from './services/blogs';
 import loginService from './services/login';
 import NewBlogForm from './components/new-blog-form';
 import Notification from './components/notification';
+import Togglable from './components/togglable'
 
 
 
@@ -12,11 +13,13 @@ import Notification from './components/notification';
 function App() {
 
   const [blogs, setBlogs] = useState([])
+  // const [filteredBlogs, setFilteredBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [error, setError] = useState(false)
   const [message, setMessage] = useState(null)
+  const [newBlogFormVisible, setNewBlogFormVisible] = useState(false)
 
 
 
@@ -78,6 +81,8 @@ function App() {
     showMessage(`logged out`)
   }
 
+  const blogFormRef = React.createRef()
+
   const handlecreate = async (e) => {
 
     const newBlog = {
@@ -105,6 +110,7 @@ function App() {
 
   const Login = () => {
 
+
     return (
       <div>
         <h2>Log in to application</h2>
@@ -129,9 +135,13 @@ function App() {
         <h2>blogs</h2>
         <p> {user.name} logged in</p>
         <button onClick={logout}>logout</button>
+        <Togglable buttonLabel='new blog' ref={blogFormRef}>
         <NewBlogForm
           handlecreate={handlecreate}
         />
+
+        </Togglable>
+
         <UserBlogs
           blogs={blogs}
           user={user}
@@ -139,10 +149,6 @@ function App() {
       </div>
     )
   }
-
-
-
-
 
   return (
     <div>

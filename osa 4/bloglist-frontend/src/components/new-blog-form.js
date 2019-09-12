@@ -18,10 +18,9 @@ const NewBlogFrom = ({ handlecreate }) => {
 
     }
 
-
-
     return (
         <div>
+            <hr/>
             <form onSubmit={handleSubmit}>
                 <div>
                     title
@@ -55,6 +54,7 @@ const NewBlogFrom = ({ handlecreate }) => {
                 </div>
 
             </form>
+            <hr/>
         </div>
     )
 }
