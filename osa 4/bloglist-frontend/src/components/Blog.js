@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import blogsService from '../services/blogs'
-import blogs from '../services/blogs'
 
-const Blog = ({ blog }) => {
+
+const Blog = ({ blog, setBlogs, blogs }) => {
 
   const [activeBlog, setActiveBlog] = useState(false)
+
   const hideWhenUnActivate = { display: activeBlog ? 'none' : '' }
   const showWhenActivate = { display: activeBlog ? '' : 'none' }
 
@@ -19,7 +20,7 @@ const Blog = ({ blog }) => {
     margin: 5,
     padding: 5
   }
- 
+
 
   const toggleLi = () => {
     setActiveBlog(!activeBlog)
@@ -29,21 +30,16 @@ const Blog = ({ blog }) => {
   const updateBlog = async () => {
 
     try {
-     
       blog.likes += 1 
     
     const response = await blogsService.update(blog)
+  
+    setBlogs(blogs.filter(blog => blog.id !== response.id).concat(response))
 
-   
-    console.log(response)
-
-    blog = response
 
     } catch (error) {
       console.log(error)
     }
-
-    
   }
 
 
