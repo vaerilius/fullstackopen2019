@@ -40,6 +40,9 @@ const blogs = [
 const getAll = () => {
   return Promise.resolve(blogs)
 }
+const setToken = newToken => {
+  let token = `bearer ${newToken}`
+}
 
-export default { getAll }
+export default { getAll, setToken }
 
