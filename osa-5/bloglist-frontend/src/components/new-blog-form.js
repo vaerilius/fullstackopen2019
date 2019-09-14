@@ -15,13 +15,10 @@ const NewBlogFrom = ({ handlecreate }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    handlecreate({ title: title.value, author: author.value, url: url.value })
-
+    handlecreate({ title: title.obj.value, author: author.obj.value, url: url.obj.value })
     title.reset()
     author.reset()
     url.reset()
-
-
   }
 
   return (
@@ -29,7 +26,7 @@ const NewBlogFrom = ({ handlecreate }) => {
       <hr/>
       <form onSubmit={handleSubmit}>
         <div> title
-          <input  {...title}
+          <input  {...title.obj}
             // type="text"
             // value={title}
             // name="title"
@@ -37,7 +34,7 @@ const NewBlogFrom = ({ handlecreate }) => {
           />
         </div>
         <div> author
-          <input {...author}
+          <input {...author.obj}
             // type="text"
             // value={author}
             // name="author"
@@ -45,7 +42,7 @@ const NewBlogFrom = ({ handlecreate }) => {
           />
         </div>
         <div> url
-          <input {...url}
+          <input {...url.obj}
             // type="text"
             // value={url}
             // name="url"

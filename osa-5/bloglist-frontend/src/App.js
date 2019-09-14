@@ -55,13 +55,13 @@ function App() {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
+
       const userObj = {
-        username: username.value,
-        password: password.value
+        username: username.obj.value,
+        password: password.obj.value
       }
       
       const loggedUser = await loginService.login(userObj)
-      console.log(loggedUser)
       localStorage.setItem('user', JSON.stringify(loggedUser))
 
       blogService.setToken(loggedUser.token)
@@ -90,19 +90,21 @@ function App() {
   const blogFormRef = React.createRef()
 
   const handlecreate = async (props) => {
-    console.log(props)
+
     const newBlog = {
       title: props.title,
       author: props.author,
       url: props.url,
       likes: 0
     }
+    
 
     try {
       await blogService.create(newBlog)
 
       const allBlogs = await blogService.getAll()
       setBlogs(allBlogs)
+
       setError(null)
       showMessage(`a new blog ${newBlog.title} by ${newBlog.author}`)
 
