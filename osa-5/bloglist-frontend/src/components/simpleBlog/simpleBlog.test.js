@@ -17,7 +17,7 @@ test('renders content ', () => {
   const component = render(
     <SimpleBlog blog={ blog } />
   )
- 
+
 
   expect(component.container).toHaveTextContent(
     'this is title facebook jest'

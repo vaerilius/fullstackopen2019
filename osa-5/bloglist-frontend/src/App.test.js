@@ -19,8 +19,8 @@ describe('<App />', () => {
 
     const inputs =  component.container.querySelectorAll('input')
 
-    expect(inputs[0]).toHaveTextContent('')  
-    expect(inputs[1]).toHaveTextContent('')  
+    expect(inputs[0]).toHaveTextContent('')
+    expect(inputs[1]).toHaveTextContent('')
 
   })
   test('if user is logged in, blogs are rendered', async () => {
@@ -30,7 +30,7 @@ describe('<App />', () => {
       name: 'Matti Luukkainen'
     }
     localStorage.setItem('user', JSON.stringify(user))
-    
+
 
 
     const component = render(
@@ -41,7 +41,7 @@ describe('<App />', () => {
       () => component.container.querySelector('.blog')
     )
     const blogs = component.container.querySelectorAll('.blog')
-    expect(blogs.length).toBe(3) 
+    expect(blogs.length).toBe(3)
 
 
     const loggedUser = `${user.name} logged in`
@@ -56,8 +56,8 @@ describe('<App />', () => {
     expect(component.container).toHaveTextContent(
       'The most important methods of HTTP are GET and POST'
     )
-    
+
     // component.debug()
   })
-  
+
 })

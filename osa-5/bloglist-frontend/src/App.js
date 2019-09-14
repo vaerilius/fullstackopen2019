@@ -7,13 +7,18 @@ import NewBlogForm from './components/new-blog-form'
 import Notification from './components/notification'
 import Togglable from './components/togglable'
 import PropTypes from 'prop-types'
+import {useField} from './hooks'
+
 
 function App() {
 
   const [blogs, setBlogs] = useState([])
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  // const [username, setUsername] = useState('')
+  // const [password, setPassword] = useState('')
+  const username = useField('text')
+  const password = useField('password')
+
   const [user, setUser] = useState(null)
   const [error, setError] = useState(false)
   const [message, setMessage] = useState(null)
@@ -22,7 +27,6 @@ function App() {
 
     blogService.getAll().then(initialBlogs => {
       setBlogs(initialBlogs)
-      console.log(initialBlogs)
     })
 
   }, []  )
@@ -51,15 +55,20 @@ function App() {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const loggedUser = await loginService.login({ username, password })
-
+      const userObj = {
+        username: username.value,
+        password: password.value
+      }
+      
+      const loggedUser = await loginService.login(userObj)
+      console.log(loggedUser)
       localStorage.setItem('user', JSON.stringify(loggedUser))
 
       blogService.setToken(loggedUser.token)
       setUser(loggedUser)
 
-      setUsername('')
-      setPassword('')
+      // setUsername('')
+      // setPassword('')
       setError(null)
       showMessage(`user:  ${loggedUser.username} logged in`)
     } catch (error) {
@@ -113,10 +122,10 @@ function App() {
         <h2>Log in to application</h2>
         <LoginForm
           username={username}
-          setUsername={setUsername}
+          // setUsername={setUsername}
           handleLogin={handleLogin}
           password={password}
-          setPassword={setPassword}
+          // setPassword={setPassword}
         />
       </div>
     )

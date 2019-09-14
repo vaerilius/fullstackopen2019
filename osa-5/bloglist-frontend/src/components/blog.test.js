@@ -28,12 +28,12 @@ describe('<Blog />', () => {
   test('at start the blog are not active', () => {
     const div =  component.container.querySelectorAll('div')
 
-    expect(div[1]).toHaveStyle('display: none')     
+    expect(div[1]).toHaveStyle('display: none')
   })
   test('at start the blog show only title and author', () => {
     const div =  component.container.querySelectorAll('div')
 
-    expect(div[0]).toHaveStyle('display: block')    
+    expect(div[0]).toHaveStyle('display: block')
     expect(div[0]).toHaveTextContent(
       'I like Testing with jest Timo Tamminen'
     )
@@ -49,9 +49,9 @@ describe('<Blog />', () => {
     expect(div[1]).toHaveStyle('display: block')
     expect(div[1]).toHaveTextContent(
       'I like Testing with jest Timo Tamminenvaerilius.fi 1 likes likeAdded by timiremove'
-  )  
-    
+    )
+
   })
 
   console.log(prettyDOM)
-  })
+})
