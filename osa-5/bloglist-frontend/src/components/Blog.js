@@ -60,8 +60,8 @@ const Blog = ({ blog, blogs, setBlogs }) => {
   }
 
   return (
-    <li style={ liStyle } onClick={ toggleLi }>
-      <div style={hideWhenUnActivate}>{blog.title} {blog.author}</div>
+    <li style={  liStyle } onClick={ toggleLi } className={'blog'}>
+      <div style={hideWhenUnActivate} className={'unactive'}>{blog.title} {blog.author}</div>
 
       <div style={ showWhenActivate } className={ active }>
         <div>{ blog.title } {blog.author}</div>

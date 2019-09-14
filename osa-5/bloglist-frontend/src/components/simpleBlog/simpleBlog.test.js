@@ -1,9 +1,7 @@
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
 import SimpleBlog from './simple-blog'
 import { prettyDOM, fireEvent } from '@testing-library/dom'
-import { async } from 'q'
 
 afterEach(cleanup)
 
@@ -17,7 +15,7 @@ test('renders content ', () => {
   }
 
   const component = render(
-    <SimpleBlog blog={blog} />
+    <SimpleBlog blog={ blog } />
   )
  
 
@@ -30,7 +28,7 @@ test('renders content ', () => {
   console.log(prettyDOM)
 
 })
-test('clicking the button calls event handler two times', async () => {
+test('clicking the button calls event handler two times', () => {
 
   const blog = {
     title: 'this is title',

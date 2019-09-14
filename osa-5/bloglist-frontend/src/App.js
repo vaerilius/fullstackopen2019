@@ -22,6 +22,7 @@ function App() {
 
     blogService.getAll().then(initialBlogs => {
       setBlogs(initialBlogs)
+      console.log(initialBlogs)
     })
 
   }, []  )
