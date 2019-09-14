@@ -67,6 +67,8 @@ function App() {
       blogService.setToken(loggedUser.token)
       setUser(loggedUser)
 
+      username.reset()
+      password.reset()
       // setUsername('')
       // setPassword('')
       setError(null)
@@ -87,12 +89,12 @@ function App() {
 
   const blogFormRef = React.createRef()
 
-  const handlecreate = async (e) => {
-
+  const handlecreate = async (props) => {
+    console.log(props)
     const newBlog = {
-      title: e.target.title.value,
-      author: e.target.author.value,
-      url: e.target.url.value,
+      title: props.title,
+      author: props.author,
+      url: props.url,
       likes: 0
     }
 
