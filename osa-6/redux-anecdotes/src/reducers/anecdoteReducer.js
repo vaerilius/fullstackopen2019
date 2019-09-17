@@ -20,8 +20,8 @@ const asObject = (anecdote) => {
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
-console.log('state now: ', state)
- console.log('action', action)
+// console.log('state now: ', state)
+//  console.log('action', action)
 
   switch (action.type) {
     case 'VOTE_ANECDOTE':
@@ -35,7 +35,6 @@ console.log('state now: ', state)
 
       return state.filter(a => a.id !== a ? a : newAnec).sort((a1, a2) => a2.votes - a1.votes)
     case 'ADD_ANECDOTE':
-      console.log(action.data)
       return [...state, action.data]
     default:
       return state

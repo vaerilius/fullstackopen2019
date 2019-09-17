@@ -1,23 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { voteAnec } from '../reducers/anecdoteReducer'
 import { setNotification, removeNotification } from '../reducers/notificationReduser'
 
 
 const AnecdoteList = (props) => {
-  const store = props.store
-  const anecdotes = props.store.getState().anecdotes
-  const filter = props.store.getState().filter
-
-
 
   const vote = (id, anecdote) => {
-    // console.log('vote', id)
-    store.dispatch(voteAnec(id))
 
-    store.dispatch(setNotification(`you voted '${anecdote.content}'`))
+    props.voteAnec(id)
+
+    props.setNotification(`you voted '${anecdote.content}'`)
 
     setTimeout(() => {
-      store.dispatch(removeNotification())
+      props.removeNotification()
     }, 5000)
 
 
@@ -26,7 +22,7 @@ const AnecdoteList = (props) => {
   return (
     <div >
       <h2>Anecdotes</h2>
-      {anecdotes.map(anecdote => anecdote.content.toUpperCase().includes(filter.toUpperCase()) ?
+      {props.visibleAnecdotes.map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
@@ -36,12 +32,33 @@ const AnecdoteList = (props) => {
             <button onClick={() => vote(anecdote.id, anecdote)}>vote</button>
           </div>
         </div>
-      :
-      null)}
+      )}
 
     </div>
 
   )
 }
+const anecdotesToShow = ({anecdotes, filter}) => {
+  if (filter === null) {
+    return anecdotes
+  }
+  return anecdotes.filter(anecdote => anecdote.content.toUpperCase().includes(filter.toUpperCase()))
+  }
 
-export default AnecdoteList
+
+const mapDispatchToProps = {
+  voteAnec,
+  setNotification,
+  removeNotification
+}
+
+const mapStateToProps = (state) => {
+  return {
+    visibleAnecdotes: anecdotesToShow(state),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AnecdoteList)
