@@ -3,7 +3,7 @@ import { voteAnec} from '../reducers/anecdoteReducer'
 
 const AnecdoteList = (props) => {
   const store = props.store
-  const anecdotes = props.store.getState()
+  const anecdotes = props.store.getState().anecdotes
 
 
   const vote = (id) => {
