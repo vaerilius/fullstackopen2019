@@ -1,5 +1,4 @@
 
-
 const reduser = (state = null, action) => {
     console.log('state notification: ', state)
     console.log('action', action)

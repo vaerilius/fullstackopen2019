@@ -6,6 +6,8 @@ import { setNotification, removeNotification } from '../reducers/notificationRed
 const AnecdoteList = (props) => {
   const store = props.store
   const anecdotes = props.store.getState().anecdotes
+  const filter = props.store.getState().filter
+
 
 
   const vote = (id, anecdote) => {
@@ -24,7 +26,7 @@ const AnecdoteList = (props) => {
   return (
     <div >
       <h2>Anecdotes</h2>
-      {anecdotes.map(anecdote =>
+      {anecdotes.map(anecdote => anecdote.content.toUpperCase().includes(filter.toUpperCase()) ?
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
@@ -34,7 +36,8 @@ const AnecdoteList = (props) => {
             <button onClick={() => vote(anecdote.id, anecdote)}>vote</button>
           </div>
         </div>
-      )}
+      :
+      null)}
 
     </div>
 
