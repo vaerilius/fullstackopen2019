@@ -8,8 +8,6 @@ const Notification = (props) => {
     borderWidth: 1
   }
 
-
-
   return (
     <>
     {props.notification == null 
@@ -25,4 +23,11 @@ const Notification = (props) => {
   )
 }
 
-export default connect(null, )(Notification)
+
+const mapStateToProps = (state) => {
+  return {
+    notification: state.notification
+  }
+}
+
+export default connect(null,mapStateToProps)(Notification)
