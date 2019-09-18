@@ -1,0 +1,10 @@
+selain->palvelin HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note over selain:
+käyttäjä laukaisee eventin ja js-koodi lähettää POST tyyppisen pyynnön palvelimelle, joka sisältää
+JSON-muodossa olevan uuden muistiinpanon. Myös puskee Olion taulukkoon ja piirtää <ul> sisällön uusiksi
+end note
+
+note over palvelin:
+Selain pysyy samalla sivulla ja muita HTTP-pyyntöjä ei suoriteta.
+end note
