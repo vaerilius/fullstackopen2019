@@ -1,7 +1,5 @@
 
 const reduser = (state = null, action) => {
-    console.log('state notification: ', state)
-    console.log('action', action)
 
     switch (action.type) {
         case 'SET_NOTIFICATION':
