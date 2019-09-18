@@ -5,22 +5,31 @@ const reduser = (state = null, action) => {
         case 'SET_NOTIFICATION':
             return action.notification
         case 'REMOVE_NOTIFICATION':
-            return null 
+            return null
         default:
             return state;
     }
 }
 
-export const setNotification = (notification) => {
-    return {
-        type: 'SET_NOTIFICATION',
-        notification
+export const setNotification = (notification, time) => {
+    return async dispatch => {
+        dispatch({
+            type: 'SET_NOTIFICATION',
+            notification
+        })
+        setTimeout(() => {
+            dispatch({
+                type: 'REMOVE_NOTIFICATION'
+            })
+        }, time);
     }
+
+
 }
 export const removeNotification = () => {
     return {
         type: 'REMOVE_NOTIFICATION'
-        
+
     }
 }
 

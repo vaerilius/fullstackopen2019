@@ -4,13 +4,14 @@ import { connect } from 'react-redux'
 const Notification = (props) => {
   const style = {
     border: 'solid',
-    padding: 10,
-    borderWidth: 1
+    padding: 20,
+    margin: 20,
+    borderWidth: 1,
+    textAlign: 'center'
   }
-
   return (
     <>
-    {props.notification == null 
+    {props.notification === null 
       ? <> </>
       : 
       <div style={style}>
@@ -30,4 +31,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(null,mapStateToProps)(Notification)
+export default connect(mapStateToProps)(Notification)
