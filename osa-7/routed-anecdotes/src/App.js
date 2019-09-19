@@ -31,8 +31,12 @@ const Anecdote = ({ anecdote }) => {
   )
 }
 
-const AnecdoteList = ({ anecdotes }) => (
+const AnecdoteList = ({ anecdotes, setNotification, notification }) => {
+
+
+  return(
   <div>
+    {notification === '' ? null : <p> {notification} </p>}
     <h2>Anecdotes</h2>
     <ul>
       {anecdotes.map(anecdote =>
@@ -43,7 +47,7 @@ const AnecdoteList = ({ anecdotes }) => (
         )} 
     </ul>
   </div>
-)
+)}
 
 const About = () => (
   <div>
@@ -81,6 +85,7 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+  
   }
 
   return (
@@ -130,6 +135,11 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`a new anecdote ${anecdote.content} created!`)
+    setTimeout(() => {
+      setNotification('')
+    }, 10000);
+
   }
 
   const anecdoteById = (id) =>
@@ -153,11 +163,25 @@ const App = () => {
         <div>
           <h1>Software anecdotes</h1>
           <Menu />
-          <Route exact path={"/"} render={() => <AnecdoteList anecdotes={anecdotes} />} />
+          <Route exact path={"/"} render={() =>
+             <AnecdoteList anecdotes={anecdotes}
+             setNotification={setNotification}
+             notification={notification}
+             />} />
           <Route exact path={"/anecdotes/:id"} render={({ match }) => 
           <Anecdote anecdote={anecdoteById(match.params.id)}/>} />
 
-          <Route exact path={"/create"} render={() => <CreateNew addNew={addNew} />} />
+          <Route exact path={"/create"} render={() =>
+          notification === '' ?
+          <CreateNew 
+          addNew={addNew}
+          setNotification={setNotification}
+          notification={notification}
+          />
+          :
+          <Redirect to={"/"}/> 
+          }/>
+
           <Route exact path={"/about"} render={() => <About />} />
 
 
