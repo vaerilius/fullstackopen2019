@@ -6,14 +6,14 @@ const reducer = (
   state = null,
   action) => {
   switch (action.type) {
-  case 'INIT_USER':
-    return action.user
-  case 'LOGIN_USER':
-    return action.newUser
-  case 'LOGOUT':
-    return null
-  default:
-    return state
+    case 'INIT_USER':
+      return action.user
+    case 'LOGIN_USER':
+      return action.newUser
+    case 'LOGOUT':
+      return null
+    default:
+      return state
   }
 }
 
@@ -24,7 +24,7 @@ export const logout = () => {
     dispatch({
       type: 'LOGOUT'
     })
-    dispatch(setNotification({ message: 'user loggedout', type:'' }))
+    dispatch(setNotification({ message: 'user loggedout', type: '' }))
 
   }
 }
@@ -43,13 +43,13 @@ export const loginUser = user => {
           type: 'LOGIN_USER',
           newUser
         })
-    dispatch(setNotification({ message: `user: ${newUser.username} logged in`, type:'' }))
+        dispatch(setNotification({ message: `user: ${newUser.username} logged in`, type: '' }))
 
       }
 
     } catch (error) {
       dispatch(
-      setNotification({ message: 'wrong username or password', type:'error' })
+        setNotification({ message: 'wrong username or password', type: 'error' })
       )
     }
   }

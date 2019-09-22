@@ -1,4 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { onCreateBlog } from '../reducers/blogsReducer'
+
+
 import { useField } from '../hooks'
 
 const NewBlog = (props) => {
@@ -6,16 +10,20 @@ const NewBlog = (props) => {
   const [author, authorReset] = useField('text')
   const [url, urlReset] = useField('text')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault()
-    props.createBlog({
+
+    props.onCreateBlog({
       title: title.value,
       author: author.value,
       url: url.value
     })
+   
+    props.newBlogRef.current.toggleVisibility()
     titleReset()
     authorReset()
     urlReset()
+
   }
 
   return (
@@ -41,4 +49,10 @@ const NewBlog = (props) => {
   )
 }
 
-export default NewBlog
+
+export default connect(
+  null,
+  {
+    onCreateBlog
+  }
+)(NewBlog)
