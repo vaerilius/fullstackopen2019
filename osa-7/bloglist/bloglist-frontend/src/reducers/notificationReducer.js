@@ -1,6 +1,4 @@
-
-
-const reduser = (state = { type: '' , message: null }, action) => {
+const reduser = (state = { type: '', message: null }, action) => {
   switch (action.type) {
     case 'SET_MESSAGE':
       return action.notification
@@ -19,7 +17,7 @@ export const setNotification = (notification) => {
     setTimeout(() => {
       dispatch({
         type: 'SET_MESSAGE',
-        notification: { type: '' ,message: null }
+        notification: { type: '', message: null }
       })
     }, 5000)
   }

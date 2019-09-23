@@ -12,7 +12,6 @@ const Logout = (props) => {
   return (
     <>
      {props.user.name} logged in <Button onClick={handleLogout}>logout</Button>
-      
     </>
   )
 }
