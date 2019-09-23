@@ -1,11 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import Blog from './Blog'
+import Togglable from '../components/Togglable'
+import NewBlog from '../components/NewBlog'
+
 
 import { onLikeBlog, onRemoveBlog } from '../reducers/blogsReducer'
 
 
 const BlogList = (props) => {
+  const newBlogRef = React.createRef()
+
 
 
   const likeBlog = blog => props.onLikeBlog(blog)
@@ -21,9 +26,13 @@ const BlogList = (props) => {
 
   return (
     <div>
+      <br />
+      <Togglable buttonLabel='create new' ref={newBlogRef}>
+        <NewBlog newBlogRef={newBlogRef} />
+      </Togglable>
       <hr />
       {props.blogs
-      
+
         .map(blog =>
           <Blog
             key={blog.id}

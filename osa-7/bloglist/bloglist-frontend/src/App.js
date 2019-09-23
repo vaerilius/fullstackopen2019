@@ -2,17 +2,24 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 
 import BlogList from './components/Blogs'
-import NewBlog from './components/NewBlog'
 import LoginForm from './components/loginForm'
 import Logout from './components/logout'
 import Notification from './components/Notification'
-import Togglable from './components/Togglable'
+import Menu from './components/navbar/navbar'
 
 import { initializeUser} from './reducers/loginReducer'
 import { initializeBlogs} from './reducers/blogsReducer'
+import {
+  BrowserRouter as Router,
+  Route,
+
+  
+} from 'react-router-dom'
+import Users from './components/users/users';
 
 
 const App = (props) => {
+
 
   useEffect(() => {
     props.initializeUser()
@@ -29,18 +36,27 @@ const App = (props) => {
     )
   }
 
-  const newBlogRef = React.createRef()
 
   return (
     <div>
+      <Router>
+        <div>
+        <Menu />
+
       <h2>blogs</h2>
       <Notification />
       <Logout />
-      <Togglable buttonLabel='create new' ref={newBlogRef}>
-        <NewBlog newBlogRef={ newBlogRef }/>
-      </Togglable>
-      <BlogList />
+  
+      <Route exact path="/" render={() => <BlogList />} />
+
+      <Route exact path="/users" render={() => <Users />} />
+
+
+        </div>
+      </Router>
     </div>
+
+
   )
 }
 const mapStateToProps = state => {
