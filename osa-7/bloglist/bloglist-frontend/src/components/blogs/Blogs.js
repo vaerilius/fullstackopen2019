@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import BlogListItem from './blog/Blog-list-item'
 import Togglable from '../Togglable'
 import NewBlog from './blog/NewBlog'

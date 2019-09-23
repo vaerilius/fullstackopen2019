@@ -4,18 +4,18 @@ import { setNotification } from './notificationReducer'
 
 const reducer = (state = [], action) => {
   switch (action.type) {
-    case 'INIT_BLOGS':
-      return [...action.blogs]
-    case 'CREATE_BLOG':
-      return [...state, action.blog]
-    case 'VOTE_BLOG':
-      return [...action.newState]
-    case 'COMMENT_BLOG':
-      return [...action.newState]
-    case 'REMOVE_BLOG':
-      return [...state].filter(b => b.id !== action.id)
-    default:
-      return state
+  case 'INIT_BLOGS':
+    return [...action.blogs]
+  case 'CREATE_BLOG':
+    return [...state, action.blog]
+  case 'VOTE_BLOG':
+    return [...action.newState]
+  case 'COMMENT_BLOG':
+    return [...action.newState]
+  case 'REMOVE_BLOG':
+    return [...state].filter(b => b.id !== action.id)
+  default:
+    return state
   }
 }
 export const initializeBlogs = () => {

@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link }
- from 'react-router-dom'
-
-
+  from 'react-router-dom'
 
 const Users = (props) => {
 
@@ -17,12 +15,12 @@ const Users = (props) => {
             <th>blogs created</th>
           </tr>
           {props.users.map(user => user.username === 'root' ? null :
-          <tr key={user.id} >
-          <td >
-          <Link to={`users/${user.id}`}>{user.name}</Link>
-          </td>
-          <td>{user.blogs.length}</td>
-        </tr>
+            <tr key={user.id} >
+              <td >
+                <Link to={`users/${user.id}`}>{user.name}</Link>
+              </td>
+              <td>{user.blogs.length}</td>
+            </tr>
           )}
         </tbody>
       </table>
@@ -30,10 +28,6 @@ const Users = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-
-  return { users: state.users }
-
-}
+const mapStateToProps = state => ({ users: state.users })
 
 export default connect(mapStateToProps)(Users)

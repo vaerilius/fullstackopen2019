@@ -1,11 +1,10 @@
 const reduser = (state = { type: '', message: null }, action) => {
   switch (action.type) {
-    case 'SET_MESSAGE':
-      return action.notification
-    default:
-      return state
+  case 'SET_MESSAGE':
+    return action.notification
+  default:
+    return state
   }
-
 }
 
 export const setNotification = (notification) => {

@@ -4,7 +4,6 @@ import { loginUser } from '../reducers/loginReducer'
 import { useField } from '../hooks/index'
 import { Header, Input, Button } from 'semantic-ui-react'
 
-
 const LoginForm = (props) => {
   const [username] = useField('text')
   const [password] = useField('password')
@@ -23,11 +22,11 @@ const LoginForm = (props) => {
       <form onSubmit={handleLogin}>
         <div>
           käyttäjätunnus
-            <Input {...username} />
+          <Input {...username} />
         </div>
         <div>
           salasana
-            <Input {...password} />
+          <Input {...password} />
         </div>
         <Button type="submit">Login</Button>
       </form>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Container, Header } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 
 import Blogs from './components/blogs/Blogs'
 import BlogDetails from './components/blogs/blog/blog-details'
@@ -9,8 +9,6 @@ import Notification from './components/Notification'
 import Navbar from './components/navbar/navbar'
 import UserBlogs from './components/users/user/userBlogs'
 import Users from './components/users/users'
-
-
 
 import { initializeUser } from './reducers/loginReducer'
 import { initializeBlogs } from './reducers/blogsReducer'

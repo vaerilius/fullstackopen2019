@@ -6,14 +6,14 @@ const reducer = (
   state = null,
   action) => {
   switch (action.type) {
-    case 'INIT_USER':
-      return action.user
-    case 'LOGIN_USER':
-      return action.newUser
-    case 'LOGOUT':
-      return null
-    default:
-      return state
+  case 'INIT_USER':
+    return action.user
+  case 'LOGIN_USER':
+    return action.newUser
+  case 'LOGOUT':
+    return null
+  default:
+    return state
   }
 }
 

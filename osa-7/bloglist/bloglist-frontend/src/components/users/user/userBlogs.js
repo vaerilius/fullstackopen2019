@@ -11,7 +11,7 @@ const UserBlogs = ({ user }) => {
       <p>Added blogs</p>
       <ul>
         {user.blogs.map(b =>
-        <li><Link key={b.id} to={`/blogs/${b.id}`} >{b.title}</Link></li>
+          <li key={b.id}><Link  to={`/blogs/${b.id}`} >{b.title}</Link></li>
         )}
       </ul>
     </div>
