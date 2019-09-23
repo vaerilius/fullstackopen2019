@@ -6,7 +6,7 @@ import { onLikeBlog, onRemoveBlog } from '../../../reducers/blogsReducer'
 const BlogDetails = (props) => {
   console.log(props.blog);
   if (
-    props.blog === undefined || props.creator === undefined) {
+    props.blog === undefined ) {
     return null
   }
 
@@ -21,7 +21,7 @@ const BlogDetails = (props) => {
         <button onClick={() => like(props.blog)}>like</button>
       </div>
       <div>added by {props.blog.user.name}</div>
-      {props.creator && (<button onClick={() => remove(props.blog)}>remove </button>)}
+      {!props.creator && (<button onClick={() => remove(props.blog)}>remove </button>)}
     </div>
   )
 

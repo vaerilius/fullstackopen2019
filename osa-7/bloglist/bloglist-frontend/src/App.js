@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Blogs from './components/blogs/Blogs'
 import BlogDetails from './components/blogs/blog/blog-details'
 import LoginForm from './components/loginForm'
-import Logout from './components/logout'
 import Notification from './components/Notification'
 import Menu from './components/navbar/navbar'
 import UserBlogs from './components/users/user/userBlogs'
@@ -52,7 +51,7 @@ const App = (props) => {
         <Menu />
         <h2>blogs</h2>
         <Notification />
-        <Logout />
+       
         <Route exact path="/" render={() => <Blogs />} />
         <Route exact path="/blogs/:id" render={({ match }) =>
           <BlogDetails blog={props.blogs.find(b => b.id === match.params.id)} />

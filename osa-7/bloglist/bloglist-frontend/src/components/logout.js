@@ -7,10 +7,10 @@ const Logout = (props) => {
   const handleLogout = () => props.logout()
 
   return (
-    <div>
-      <p>{props.user.name} logged in</p>
-      <button onClick={handleLogout}>logout</button>
-    </div>
+    <>
+     {props.user.name} logged in <button onClick={handleLogout}>logout</button>
+      
+    </>
   )
 }
 

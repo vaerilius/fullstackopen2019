@@ -1,18 +1,21 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route, Link, Redirect, withRouter
-} from 'react-router-dom'
+import Logout from '../../components/logout'
+import { Link } from 'react-router-dom'
 
 const Menu = () => {
-  const padding = {
-    paddingRight: 5
+  const bg = {
+    padding: 5,
+    backgroundColor: '#d0d0d0',
+  }
+  const item = {
+    padding: 6,
+
   }
   return (
-    <div>
-      <Link style={padding} to="/">home</Link>
-      <Link style={padding} to="/users">users</Link>
-      <Link style={padding} to="/blogs">blogs</Link>
+    <div style={bg}>
+      <Link style={item} to="/">blogs</Link>
+      <Link style={item} to="/users">users</Link>
+      <Logout style={item}/>
     </div>
   )
 }
