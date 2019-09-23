@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { onCreateBlog } from '../../../reducers/blogsReducer'
+import { Form, Input, Button } from 'semantic-ui-react'
 
 import { useField } from '../../../hooks'
 
@@ -9,7 +10,7 @@ const NewBlog = (props) => {
   const [author, authorReset] = useField('text')
   const [url, urlReset] = useField('text')
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     props.onCreateBlog({
@@ -17,7 +18,7 @@ const NewBlog = (props) => {
       author: author.value,
       url: url.value
     })
-   
+
     props.newBlogRef.current.toggleVisibility()
     titleReset()
     authorReset()
@@ -27,23 +28,36 @@ const NewBlog = (props) => {
 
   return (
     <div>
-      <h2>create new</h2>
+      <h3>create new blog</h3>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group widths='equal'>
+          <Form.Field
+            control={Input}
+            label='Title'
+            placeholder='Title'
+            {...title}
+          />
+          <Form.Field
+            control={Input}
+            label='Author'
+            placeholder='Author'
+            {...author}
+          />
+          <Form.Field
+            control={Input}
+            label='Url'
+            placeholder='Url'
+            {...url}
+          />
+        </Form.Group>
+        <Form.Field
+          control={Button}
+          content='create'
+          label='Label with htmlFor'
+          type='submit'
+        />
+      </Form>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          title:
-          <input {...title} />
-        </div>
-        <div>
-          author:
-          <input {...author} />
-        </div>
-        <div>
-          url:
-          <input {...url} />
-        </div>
-        <button type='submit'>create</button>
-      </form>
     </div>
   )
 }

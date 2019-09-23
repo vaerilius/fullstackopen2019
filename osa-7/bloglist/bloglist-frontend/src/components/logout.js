@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../reducers/loginReducer'
+import { Button } from 'semantic-ui-react'
+
+
 
 const Logout = (props) => {
 
@@ -8,7 +11,7 @@ const Logout = (props) => {
 
   return (
     <>
-     {props.user.name} logged in <button onClick={handleLogout}>logout</button>
+     {props.user.name} logged in <Button onClick={handleLogout}>logout</Button>
       
     </>
   )

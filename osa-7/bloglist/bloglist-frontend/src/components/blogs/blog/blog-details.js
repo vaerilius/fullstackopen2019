@@ -1,7 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { onLikeBlog, onRemoveBlog, onAddComment } from '../../../reducers/blogsReducer'
 import { useField } from '../../../hooks'
+import { Button, Input } from 'semantic-ui-react'
 
 
 const BlogDetails = (props) => {
@@ -15,25 +16,21 @@ const BlogDetails = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(comment)
-    props.onAddComment({comment: comment.value},props.blog.id )
-    
+    props.onAddComment({ comment: comment.value }, props.blog.id )
     clearComment()
 
-
   }
-
   const like = (blog) => props.onLikeBlog(blog)
   const remove = (blog) => props.onRemoveBlog(blog)
-
 
   const details = () => (
     <div >
       <a href={props.blog.url}>{props.blog.url}</a>
       <div>{props.blog.likes} likes
-        <button onClick={() => like(props.blog)}>like</button>
+        <Button onClick={() => like(props.blog)}>like</Button>
       </div>
       <div>added by {props.blog.user.name}</div>
-      {!props.creator && (<button onClick={() => remove(props.blog)}>remove </button>)}
+      {!props.creator && (<Button onClick={() => remove(props.blog)}>remove </Button>)}
     </div>
   )
 
@@ -44,16 +41,14 @@ const BlogDetails = (props) => {
       <h4>Comments</h4>
       <form onSubmit={handleSubmit}>
         <div>
-          <input {...comment} />
-          <button type='submit'>add comment</button>
+          <Input {...comment} />
+          <Button type='submit'>add comment</Button>
         </div>
-
       </form>
-      
       <ul>
         {props.blog.comments.map(comment =>
           <li key={comment}> {comment} </li>
-          )}
+        )}
       </ul>
 
     </div>

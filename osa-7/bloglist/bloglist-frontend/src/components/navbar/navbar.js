@@ -1,23 +1,43 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Logout from '../../components/logout'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
 
-
-const Menu = () => {
-  const bg = {
-    padding: 5,
-    backgroundColor: '#d0d0d0',
-  }
-  const item = {
-    padding: 6,
-
-  }
+const Navbar = (props) => {
   return (
-    <div style={bg}>
-      <Link style={item} to="/">blogs</Link>
-      <Link style={item} to="/users">users</Link>
-      <Logout style={item}/>
-    </div>
+    <Menu inverted>
+      <Menu.Item
+        name='blogs'
+      >
+        <Link to="/users">users</Link>
+      </Menu.Item>
+      <Menu.Item
+        name='users'
+
+      >
+        <Link to="/">blogs</Link>
+      </Menu.Item>
+      <Menu.Item
+        name='login'
+      >       {props.user
+          ? <em><Logout /></em>
+          : <Redirect to="/login" />
+        }</Menu.Item>
+    </Menu >
+
+
+
+
+
+
+
+
   )
 }
-export default Menu
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+export default connect(mapStateToProps)(Navbar)
