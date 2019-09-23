@@ -11,6 +11,8 @@ const reducer = (state = [], action) => {
     case 'VOTE_BLOG':
       const blog = action.updatedBlog
       return [...state].filter(b => b.id !== blog.id ? b : blog)
+    case 'COMMENT_BLOG':
+      return [...state, action.commentedBlog]
     case 'REMOVE_BLOG':
       return [...state].filter(b => b.id !== action.id)
     default:
@@ -89,5 +91,18 @@ export const onRemoveBlog = (blog) => {
     }
   }
 }
+export const onAddComment = (comment, id) => {
+ return async dispatch => {
+   const commentedBlog = await blogService.comment(comment, id)
+  
+   dispatch(
+     {
+     type: 'COMMENT_BLOG',
+      commentedBlog
+     }
+   )
+ } 
+}
+
 
 export default reducer

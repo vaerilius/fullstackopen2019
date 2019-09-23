@@ -2,6 +2,7 @@ import React from 'react'
 import Logout from '../../components/logout'
 import { Link } from 'react-router-dom'
 
+
 const Menu = () => {
   const bg = {
     padding: 5,

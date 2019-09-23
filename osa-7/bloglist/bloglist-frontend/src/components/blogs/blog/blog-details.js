@@ -1,12 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { onLikeBlog, onRemoveBlog } from '../../../reducers/blogsReducer'
+import { onLikeBlog, onRemoveBlog, onAddComment } from '../../../reducers/blogsReducer'
+import { useField } from '../../../hooks'
 
 
 const BlogDetails = (props) => {
+
   if (
     props.blog === undefined ) {
     return null
+  }
+  const [comment, clearComment] = useField('text')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(comment)
+    props.onAddComment({comment: comment.value},props.blog.id )
+    
+    clearComment()
+
+
   }
 
   const like = (blog) => props.onLikeBlog(blog)
@@ -29,9 +42,17 @@ const BlogDetails = (props) => {
       <h1>{props.blog.title} {props.blog.author}</h1>
       {details()}
       <h4>Comments</h4>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input {...comment} />
+          <button type='submit'>add comment</button>
+        </div>
+
+      </form>
+      
       <ul>
         {props.blog.comments.map(comment =>
-          <li> {comment} </li>
+          <li key={comment}> {comment} </li>
           )}
       </ul>
 
@@ -44,6 +65,7 @@ export default connect(
   null,
   {
     onLikeBlog,
-    onRemoveBlog
+    onRemoveBlog,
+    onAddComment
   }
 )(BlogDetails)
