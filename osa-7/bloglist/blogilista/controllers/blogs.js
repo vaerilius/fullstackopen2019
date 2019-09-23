@@ -28,6 +28,7 @@ blogsRouter.get('/:id', async (request, response, next) => {
 
 
 
+
 blogsRouter.post('/', async (request, response, next) => {
 
     const body = request.body
@@ -95,6 +96,18 @@ blogsRouter.put('/:id', async (request, response, next) => {
     } catch (error) {
         next(error)
     }
+})
+
+blogsRouter.post('/:id/comments', async (request, response, next) => {
+    //https://docs.mongodb.com/manual/reference/operator/update/push/
+    try {
+        const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, { $push: { comments: request.body.comment } }, { new: true })
+       response.json(updatedBlog.toJSON())
+ 
+    } catch (error) {
+        next(error)
+    }
+
 })
 
 module.exports = blogsRouter

@@ -2,14 +2,15 @@ const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator');
 mongoose.set('useFindAndModify', false);
 const blogSchema = mongoose.Schema({
-    title: {type: String, required: true},
-    author: {type: String, required: true},
-    url: {type: String, required: true},
+    title: { type: String, required: true },
+    author: { type: String, required: true },
+    url: { type: String, required: true },
     likes: Number,
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    comments: []
 })
 blogSchema.plugin(uniqueValidator)
 

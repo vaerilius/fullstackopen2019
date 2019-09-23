@@ -4,7 +4,6 @@ import { onLikeBlog, onRemoveBlog } from '../../../reducers/blogsReducer'
 
 
 const BlogDetails = (props) => {
-  console.log(props.blog);
   if (
     props.blog === undefined ) {
     return null
@@ -29,6 +28,13 @@ const BlogDetails = (props) => {
     <div >
       <h1>{props.blog.title} {props.blog.author}</h1>
       {details()}
+      <h4>Comments</h4>
+      <ul>
+        {props.blog.comments.map(comment =>
+          <li> {comment} </li>
+          )}
+      </ul>
+
     </div>
   )
 }

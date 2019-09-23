@@ -49,9 +49,8 @@ const App = (props) => {
     <div>
       <Router>
         <Menu />
-        <h2>blogs</h2>
+        <h2>Awesome Blog App</h2>
         <Notification />
-       
         <Route exact path="/" render={() => <Blogs />} />
         <Route exact path="/blogs/:id" render={({ match }) =>
           <BlogDetails blog={props.blogs.find(b => b.id === match.params.id)} />

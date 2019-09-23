@@ -15,7 +15,6 @@ const BlogList = (props) => {
 
   return (
     <div>
-      <br />
       <Togglable buttonLabel='create new' ref={newBlogRef}>
         <NewBlog newBlogRef={newBlogRef} />
       </Togglable>
