@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import User from './user/user'
-import { initiazeUsers } from '../../reducers/usersReducer'
+import { Link }
+ from 'react-router-dom'
+
 
 
 const Users = (props) => {
-
-  useEffect(() => {
-    props.initiazeUsers()
-  }, [])
 
   return (
     <div>
@@ -20,14 +17,15 @@ const Users = (props) => {
             <th>blogs created</th>
           </tr>
           {props.users.map(user => user.username === 'root' ? null :
-            <User
-              key={user.id}
-              userDetails={user}
-            />
+          <tr key={user.id} >
+          <td >
+          <Link to={`users/${user.id}`}>{user.name}</Link>
+          </td>
+          <td>{user.blogs.length}</td>
+        </tr>
           )}
         </tbody>
       </table>
-
     </div>
   )
 }
@@ -38,4 +36,4 @@ const mapStateToProps = state => {
 
 }
 
-export default connect(mapStateToProps, { initiazeUsers })(Users)
+export default connect(mapStateToProps)(Users)
