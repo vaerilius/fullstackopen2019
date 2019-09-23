@@ -17,7 +17,6 @@ const LoginForm = (props) => {
             password: password.value
         })
     }
-
     return (
         <div>
            <Header as='h1'>Login to the application</Header>
