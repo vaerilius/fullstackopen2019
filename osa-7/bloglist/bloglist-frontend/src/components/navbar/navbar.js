@@ -12,6 +12,7 @@ const Menu = () => {
     <div>
       <Link style={padding} to="/">home</Link>
       <Link style={padding} to="/users">users</Link>
+      <Link style={padding} to="/blogs">blogs</Link>
     </div>
   )
 }

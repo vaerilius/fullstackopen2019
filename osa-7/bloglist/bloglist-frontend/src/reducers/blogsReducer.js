@@ -7,7 +7,7 @@ const reducer = (state = [], action) => {
     case 'INIT_BLOGS':
       return [...action.blogs]
     case 'CREATE_BLOG':
-      return [...action.blogs]
+      return [...state, action.blog]
     case 'VOTE_BLOG':
       const blog = action.updatedBlog
       return [...state].filter(b => b.id !== blog.id ? b : blog)
@@ -36,14 +36,10 @@ export const onCreateBlog = (blog) => {
         url: blog.url,
         likes: 0
       }
-    await blogService.create(newBlog)
-    const blogs = await blogService.getAll()
-
-  
-
+    const createdBlog = await blogService.create(newBlog)
       dispatch({
         type: 'CREATE_BLOG',
-        blogs
+        blog: createdBlog
       })
       dispatch(setNotification({
         message: `a new blog ${blog.title} by ${blog.author} added`,

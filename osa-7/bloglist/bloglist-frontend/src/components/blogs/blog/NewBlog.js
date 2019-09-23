@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { onCreateBlog } from '../reducers/blogsReducer'
+import { onCreateBlog } from '../../../reducers/blogsReducer'
 
-
-import { useField } from '../hooks'
+import { useField } from '../../../hooks'
 
 const NewBlog = (props) => {
   const [title, titleReset] = useField('text')
