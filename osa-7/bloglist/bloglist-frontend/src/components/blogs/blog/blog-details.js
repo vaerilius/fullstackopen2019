@@ -28,7 +28,7 @@ const BlogDetails = (props) => {
     <div >
       <a href={props.blog.url}>{props.blog.url}</a>
       <div>{props.blog.likes} likes
-        <Button onClick={() => like(props.blog)}>like</Button>
+        <Button onClick={() => like(props.blog)} id='like'>like</Button>
       </div>
       <div>added by {props.blog.user.name}</div>
       {props.blog.user.username === props.user.username 
@@ -43,7 +43,7 @@ const BlogDetails = (props) => {
       <h4>Comments</h4>
       <form onSubmit={handleSubmit}>
         <div>
-          <Input {...comment} />
+          <Input {...comment} id="commentInput"/>
           <Button type='submit'>add comment</Button>
         </div>
       </form>
