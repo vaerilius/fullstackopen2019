@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { logout } from '../reducers/loginReducer'
 import { Button } from 'semantic-ui-react'
 
-
-
 const Logout = (props) => {
 
   const handleLogout = () => props.logout()

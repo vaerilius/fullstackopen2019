@@ -58,7 +58,7 @@ const App = (props) => {
           } />
 
           <Route exact path="/users" render={() => <Users />} />
-          <Route path="/users/:id" render={({ match }) =>
+          <Route exact path="/users/:id" render={({ match }) =>
             <UserBlogs
               user={byId(match.params.id)}
             />} />
@@ -70,7 +70,6 @@ const App = (props) => {
   )
 }
 const mapStateToProps = state => {
-  console.log(state)
   return {
     user: state.user,
     users: state.users,

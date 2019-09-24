@@ -4,18 +4,19 @@ import { setNotification } from './notificationReducer'
 
 const reducer = (state = [], action) => {
   switch (action.type) {
-  case 'INIT_BLOGS':
-    return [...action.blogs]
-  case 'CREATE_BLOG':
-    return [...state, action.blog]
-  case 'VOTE_BLOG':
-    return [...action.newState]
-  case 'COMMENT_BLOG':
-    return [...action.newState]
-  case 'REMOVE_BLOG':
-    return [...state].filter(b => b.id !== action.id)
-  default:
-    return state
+    case 'INIT_BLOGS':
+      return [...action.blogs]
+    case 'CREATE_BLOG':
+      return [...state, action.blog]
+    case 'VOTE_BLOG':
+      return [...state].map(b => b.id !== action.data.id ? b : action.data)
+        .sort((b1, b2) => b2.likes - b1.likes)
+    case 'COMMENT_BLOG':
+      return [...state].map(b => b.id !== action.data.id ? b : action.data)
+    case 'REMOVE_BLOG':
+      return [...state].filter(b => b.id !== action.id)
+    default:
+      return state
   }
 }
 export const initializeBlogs = () => {
@@ -30,7 +31,6 @@ export const initializeBlogs = () => {
 export const onCreateBlog = (blog) => {
   return async dispatch => {
     try {
-
       const newBlog = {
         title: blog.title,
         author: blog.author,
@@ -55,15 +55,11 @@ export const onLikeBlog = (blog) => {
   return async dispatch => {
     try {
       const likedBlog = { ...blog, likes: blog.likes + 1 }
-      const updatedBlog = await blogService.update(likedBlog)
-      const state = await blogService.getAll()
-      const newState = [
-        ...state,
-        updatedBlog
-      ]
+      const data = await blogService.update(likedBlog)
+
       dispatch({
         type: 'VOTE_BLOG',
-        newState
+        data
       })
       dispatch(setNotification({
         message: `blog ${blog.title} by ${blog.author} liked!`,
@@ -97,22 +93,14 @@ export const onRemoveBlog = (blog) => {
 }
 export const onAddComment = (comment, id) => {
   return async dispatch => {
-    const commentedBlog = await blogService.comment(comment, id)
-    const state = await blogService.getAll()
-
-    const newState = [
-      ...state,
-      commentedBlog
-    ]
+    const data = await blogService.comment(comment, id)
     dispatch(
       {
         type: 'COMMENT_BLOG',
-        newState
+        data
       }
     )
-
   }
-
 }
 
 

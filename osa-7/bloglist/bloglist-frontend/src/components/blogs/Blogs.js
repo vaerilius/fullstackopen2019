@@ -5,14 +5,8 @@ import Togglable from '../Togglable'
 import NewBlog from './blog/NewBlog'
 import { List } from 'semantic-ui-react'
 
-import { onLikeBlog, onRemoveBlog } from '../../reducers/blogsReducer'
-
-
 const BlogList = (props) => {
   const newBlogRef = React.createRef()
-  if (props.user === undefined) {
-    return null
-  }
 
   return (
     <div>
@@ -25,28 +19,15 @@ const BlogList = (props) => {
             <BlogListItem
               key={blog.id}
               blog={blog}
-              creator={blog.user.username === props.user.username}
             />
           )}
       </List>
-
     </div>
   )
 }
 
-
-const mapStateToProps = state => {
-
-  return {
-    user: state.user,
-    blogs: state.blogs
-  }
-}
+const mapStateToProps = state => ({ blogs: state.blogs})
 
 export default connect(
   mapStateToProps,
-  {
-    onLikeBlog,
-    onRemoveBlog
-  }
 )(BlogList)

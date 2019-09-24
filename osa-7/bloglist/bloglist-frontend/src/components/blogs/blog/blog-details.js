@@ -11,11 +11,12 @@ const BlogDetails = (props) => {
     props.blog === undefined ) {
     return null
   }
+  // console.log(props.blog.user.username , props.user.username)
+
   const [comment, clearComment] = useField('text')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(comment)
     props.onAddComment({ comment: comment.value }, props.blog.id )
     clearComment()
 
@@ -30,7 +31,8 @@ const BlogDetails = (props) => {
         <Button onClick={() => like(props.blog)}>like</Button>
       </div>
       <div>added by {props.blog.user.name}</div>
-      {!props.creator && (<Button onClick={() => remove(props.blog)}>remove </Button>)}
+      {props.blog.user.username === props.user.username 
+        && (<Button onClick={() => remove(props.blog)}>remove </Button>)}
     </div>
   )
 
@@ -54,10 +56,12 @@ const BlogDetails = (props) => {
     </div>
   )
 }
+const mapStateToProps = state => ({ user: state.user })
+
 
 
 export default connect(
-  null,
+  mapStateToProps,
   {
     onLikeBlog,
     onRemoveBlog,
