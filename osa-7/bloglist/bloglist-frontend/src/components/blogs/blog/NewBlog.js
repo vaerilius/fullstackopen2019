@@ -32,18 +32,21 @@ const NewBlog = (props) => {
       <Form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
           <Form.Field
+            id='title'
             control={Input}
             label='Title'
             placeholder='Title'
             {...title}
           />
           <Form.Field
+            id='author'
             control={Input}
             label='Author'
             placeholder='Author'
             {...author}
           />
           <Form.Field
+            id='url'
             control={Input}
             label='Url'
             placeholder='Url'
@@ -51,6 +54,7 @@ const NewBlog = (props) => {
           />
         </Form.Group>
         <Form.Field
+          id='create'
           control={Button}
           content='create'
           label='Label with htmlFor'

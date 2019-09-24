@@ -22,13 +22,13 @@ const LoginForm = (props) => {
       <form onSubmit={handleLogin}>
         <div>
           käyttäjätunnus
-          <Input {...username} />
+          <Input id='username' {...username} />
         </div>
         <div>
           salasana
-          <Input {...password} />
+          <Input id='password' {...password} />
         </div>
-        <Button type="submit">Login</Button>
+        <Button type="submit">login</Button>
       </form>
     </div>
   )
