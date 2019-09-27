@@ -101,6 +101,7 @@ const typeDefs = gql`
       author: String!
       genres: [String]!
     ): Book
+    editAuthor(name: String!, setBornTo: Int!): Author
   }  
   type Book {
     title: String!
@@ -115,7 +116,6 @@ const typeDefs = gql`
     born: Int
     bookCount: Int
   }
-  
 `
 
 const resolvers = {
@@ -153,18 +153,29 @@ const resolvers = {
     addBook: (root, args) => {
       const book = { ...args, id: uuid() }
       console.log(book)
-      if (authors.find(a => a.name !== book.author)) {
-        authors = authors.concat({
-          name: book.author,
-          id: uuid()
-        })
+      if (authors.find(a => a.name === args.author)) {
+        books = books.concat(book)
+        return book
       }
+      authors = authors.concat({
+        name: book.author,
+        id: uuid()
+      })
 
       books = books.concat(book)
       return book
+    },
+    editAuthor: (root, args) => {
+      const authorToUpdate = authors.find(author => author.name === args.name)
+      if (authorToUpdate === null) {
+        return null
+      }
+      
+      const editedAuthor = { ...authorToUpdate, born: args.setBornTo }
+      authors = authors.map(author => author.name === args.name ? editedAuthor : author)
+      return editedAuthor
     }
-  },
-
+  }
 }
 
 const server = new ApolloServer({
