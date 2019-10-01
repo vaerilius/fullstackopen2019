@@ -49,8 +49,8 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    bookCount: () => Book.collection.find({}),
-    authorCount: () => Author.collection.find({}),
+    bookCount: () => Book.collection.countDocuments(),
+    authorCount: () => Author.collection.countDocuments(),
     allBooks: async (root, args) => {
       let books
       if (args.genre) {
@@ -94,15 +94,12 @@ const resolvers = {
 
       return createdBook
     },
-    editAuthor: (root, args) => {
-      const authorToUpdate = authors.find(author => author.name === args.name)
-      if (authorToUpdate === null) {
-        return null
-      }
-
-      const editedAuthor = { ...authorToUpdate, born: args.setBornTo }
-      authors = authors.map(author => author.name === args.name ? editedAuthor : author)
-      return editedAuthor
+    editAuthor: async (root, args) => {
+      await Author
+      .updateOne({ name: { $in: [args.name] } },
+        { $set: { born: args.setBornTo } }
+        )
+      return Author.findOne({ name: args.name })
     }
   }
 }
