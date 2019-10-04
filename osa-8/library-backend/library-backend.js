@@ -109,7 +109,7 @@ const resolvers = {
     addBook: async (root, args, context) => {
       let book = new Book({ ...args })
       const currentUser = context.currentUser
-
+      console.log(book);
       if (!currentUser) {
         throw new AuthenticationError("not authenticated")
       }
@@ -133,7 +133,7 @@ const resolvers = {
 
         const createdAuthor = await newAuthor.save()
         book.author = createdAuthor
-
+        
         return await book.save()
 
       } catch (error) {
@@ -155,7 +155,7 @@ const resolvers = {
       return Author.findOne({ name: args.name })
     },
     createUser: (root, args) => {
-      const user = new User({ username: args.username })
+      const user = new User({ username: args.username, favoriteGenre: args.favoriteGenre })
 
       return user.save()
         .catch(error => {
@@ -190,7 +190,8 @@ const server = new ApolloServer({
       const decodedToken = jwt.verify(
         auth.substring(7), JWT_SECRET
       )
-      const currentUser = await User.findById(decodedToken.id).populate('friends')
+     
+      const currentUser = await User.findById(decodedToken.id).populate('users')
       return { currentUser }
     }
   }
