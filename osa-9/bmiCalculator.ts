@@ -1,4 +1,4 @@
-const calculateBmi = (height: number, weight: Number): String => {
+export const calculateBmi = (height: number, weight: Number): String => {
 	try {
 		const result: Number = +Math.floor(
 			Number(weight) / (Math.pow(height, 2) / 10000)
