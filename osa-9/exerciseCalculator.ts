@@ -10,7 +10,7 @@ interface Results_of_working_hours {
 
 interface Rating_results {
 	rating: number;
-	ratingDescription: string;
+	ratingDescription: RatingDescription;
 }
 type RatingDescription = 'bad' | 'not too bad but could be better' | 'better';
 
@@ -37,11 +37,14 @@ const rate = (avg: number, target: number): Rating_results => {
 
 const exercise_hours = [3, 0, 2, 4.5, 0, 3, 1];
 
-const calculateExercises = (
+export const calculateExercises = (
 	args: Array<number>,
 	target: number
 ): Results_of_working_hours => {
+	console.log(args);
+
 	const sum = args.reduce(reducer);
+
 	const average = +sum / args.length;
 
 	const rating_results = rate(average, target);
