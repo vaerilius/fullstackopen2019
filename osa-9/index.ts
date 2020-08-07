@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { calculateBmi } from './bmiCalculator';
 import { calculateExercises } from './exerciseCalculator';
 
-export interface CalculateExercisesRequest {
+interface CalculateExercisesRequest {
 	daily_exercises: Array<number>;
 	target: number;
 }
@@ -26,9 +26,20 @@ app.get('/bmi', (req, res) => {
 	});
 });
 app.post('/exercises', (req, res) => {
-	const body: CalculateExercisesRequest = <CalculateExercisesRequest>req.body;
-	const results = calculateExercises(body.daily_exercises, body.target);
-	res.json(results);
+	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const body: CalculateExercisesRequest = req.body;
+		if (body.daily_exercises || body.target) {
+			throw new Error('esson baariin');
+		}
+		console.log(body);
+		const results = calculateExercises(body.daily_exercises, body.target);
+		res.json(results);
+	} catch (error) {
+		res.status(400).json({
+			error: 'parameters missing',
+		});
+	}
 });
 // app.get('/calculate', (req, res) => {
 // 	const { value1, value2, op } = req.query
