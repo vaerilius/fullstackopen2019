@@ -1,5 +1,7 @@
 import { NewPatient, Gender } from '../types';
 
+// yeah, this is a bad implementation,
+//git add but the task didn't require types for these: ssn, name, and occupation
 const parseString = (obj: any): string => {
   if (!obj || !isString(obj)) {
     throw new Error('Incorrect or missing string: ' + obj);
