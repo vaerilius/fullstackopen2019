@@ -1,10 +1,7 @@
 import React from 'react';
-import { PartProps } from './part';
-interface TotalProps {
-  courseParts: PartProps[];
-}
+import { CoursePart } from '../App';
 
-const Total: React.FC<TotalProps> = ({ courseParts }) => {
+const Total: React.FC<{ courseParts: CoursePart[] }> = ({ courseParts }) => {
   return (
     <>
       <p>
