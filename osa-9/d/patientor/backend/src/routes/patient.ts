@@ -22,7 +22,9 @@ router.post('/', (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    res.send(patientService.getById(req.params.id));
+    let p = patientService.getById(req.params.id);
+    console.log(p);
+    res.send(p);
   } catch (e) {
     console.log(e);
   }
