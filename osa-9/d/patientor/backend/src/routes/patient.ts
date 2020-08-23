@@ -1,6 +1,7 @@
 import express from 'express';
 import patientService from '../services/patientsService';
 import { toNewPatientEntry } from '../utils/utils';
+import { Patient } from '../types';
 
 const router = express.Router();
 
@@ -27,6 +28,14 @@ router.get('/:id', async (req, res) => {
     res.send(p);
   } catch (e) {
     console.log(e);
+  }
+});
+router.post('/:id/entries', async (req, res) => {
+  try {
+    const p: Patient = patientService.addEntry(req.body, req.params.id);
+    res.send(p);
+  } catch (e) {
+    res.status(400).send(e.message);
   }
 });
 export default router;
