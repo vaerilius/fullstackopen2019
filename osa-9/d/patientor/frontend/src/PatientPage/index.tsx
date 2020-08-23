@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Container, Icon } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
-import { useStateValue } from '../state';
+import { useStateValue, updatePatient } from '../state';
 import { apiBaseUrl } from '../constants';
 import { Patient, Gender } from '../types';
 
@@ -11,19 +11,19 @@ const PatientPage: React.FC = () => {
   const [state, dispatch] = useStateValue();
   let patient = state.patients[id];
 
-  const updatePatient = async () => {
+  const getPatient = async () => {
     const { data } = await axios.get<Patient>(`${apiBaseUrl}/patients/${id}`);
-    dispatch({ type: 'UPDATE_PATIENT', payload: data });
+    dispatch(updatePatient(data));
     patient = { ...data };
   };
   useEffect(() => {
     if (patient && !patient.ssn) {
-      updatePatient();
+      getPatient();
     }
   }, [id]);
 
   if (!patient) {
-    updatePatient();
+    getPatient();
     return <p>fething data</p>;
   }
 
