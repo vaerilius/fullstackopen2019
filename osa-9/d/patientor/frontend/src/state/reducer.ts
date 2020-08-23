@@ -1,5 +1,6 @@
 import { State } from './state';
 import { Patient } from '../types';
+import { Entry } from '../../../backend/src/types';
 
 export type Action =
   | {
@@ -13,6 +14,10 @@ export type Action =
   | {
       type: 'UPDATE_PATIENT';
       payload: Patient;
+    }
+  | {
+      type: 'ADD_ENTRY';
+      payload: Entry;
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -52,6 +57,12 @@ export const reducer = (state: State, action: Action): State => {
 export const setPatientList = (patientListFromApi: Patient[]): Action => {
   return { type: 'SET_PATIENT_LIST', payload: patientListFromApi };
 };
-export const updatePatient = (patient: Patient): Action => {
-  return { type: 'UPDATE_PATIENT', payload: patient };
+export const addPatient = (payload: Patient): Action => {
+  return {
+    type: 'ADD_PATIENT',
+    payload,
+  };
+};
+export const updatePatient = (payload: Patient): Action => {
+  return { type: 'UPDATE_PATIENT', payload };
 };
