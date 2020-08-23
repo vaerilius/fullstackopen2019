@@ -42,14 +42,25 @@ const PatientPage: React.FC = () => {
 
   return (
     <div className="App">
-      <Container textAlign="center">
-        <h2>
+      <Container textAlign="left">
+        <h3>
           {patient.name} {chooseIcon(patient.gender)}
-        </h2>
+        </h3>
         <p>ssn: {patient.ssn} </p>
         <p>occupation: {patient.occupation} </p>
         <p>Birth date: {patient.dateOfBirth}</p>
       </Container>
+      <hr />
+      {patient.entries.map((p, i) => (
+        <Container textAlign="left" key={i}>
+          <h4>Entries</h4>
+          <p> {p.description} </p>
+          <ul>
+            {p.diagnosisCodes &&
+              p.diagnosisCodes.map((d, i) => <li key={i}>{d.toString()}</li>)}
+          </ul>
+        </Container>
+      ))}
     </div>
   );
 };
