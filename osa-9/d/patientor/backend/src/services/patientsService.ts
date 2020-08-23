@@ -26,6 +26,7 @@ const addPatient = (newPatient: NewPatient): Patient => {
 };
 const getById = (id: string): Patient | undefined => {
   const patient = <Patient>patiensData.find((p) => p.id == id);
+  console.log(patient);
   return patient;
 };
 

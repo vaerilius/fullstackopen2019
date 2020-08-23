@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useStateValue, updatePatient } from '../state';
 import { apiBaseUrl } from '../constants';
 import { Patient, Gender } from '../types';
+import EntryDetail from './entryDetail';
 
 const PatientPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -38,8 +39,6 @@ const PatientPage: React.FC = () => {
     }
   };
 
-  console.log(patient);
-
   return (
     <div className="App">
       <Container textAlign="left">
@@ -50,16 +49,8 @@ const PatientPage: React.FC = () => {
         <p>occupation: {patient.occupation} </p>
         <p>Birth date: {patient.dateOfBirth}</p>
       </Container>
-      <hr />
-      {patient.entries.map((p, i) => (
-        <Container textAlign="left" key={i}>
-          <h4>Entries</h4>
-          <p> {p.description} </p>
-          <ul>
-            {p.diagnosisCodes &&
-              p.diagnosisCodes.map((d, i) => <li key={i}>{d.toString()}</li>)}
-          </ul>
-        </Container>
+      {patient.entries.map((e, i) => (
+        <EntryDetail entry={e} key={i} />
       ))}
     </div>
   );
